@@ -1,0 +1,32 @@
+kind: Project
+name: wordpress-helm
+environments:
+- name: dev
+  providers:
+  - name: kubernetes
+    context: gke_development-223016_europe-west1-b_helloworld-2ee03e4
+    buildMode: cluster-docker
+    defaultHostname: garden.devwed.fun
+defaultEnvironment: dev
+
+---
+
+kind: Module
+description: Wordpress Bitnami Helm Chart
+type: helm
+name: wordpress-blog
+repo: https://charts.bitnami.com/bitnami
+chart: wordpress
+version: 8.1.4
+values:
+  wordpressUsername: admin
+  wordpressPassword: password
+# services:
+#   - name: blog
+#     ports:
+#       - name: http
+#         containerPort: 2368
+#         nodePort: true
+#     ingresses:
+#       - path: /wordpress
+#         port: http

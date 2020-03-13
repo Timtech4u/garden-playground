@@ -1,0 +1,28 @@
+kind: Project
+name: ghost-docker
+environments:
+- name: dev
+  providers:
+  - name: kubernetes
+    context: gke_development-223016_europe-west1-b_helloworld-2ee03e4
+    buildMode: cluster-docker
+    defaultHostname: garden.devwed.fun
+defaultEnvironment: dev
+
+---
+
+kind: Module
+name: ghost-blog
+description: My Ghost Blog
+type: container
+image: ghost # this ignores skips Dockerfile and looks for an external image
+services:
+  # Service provides a running instance of your module.
+  - name: blog
+    ports:
+      - name: http
+        containerPort: 2368
+        nodePort: true
+    ingresses:
+      - path: /blog
+        port: http

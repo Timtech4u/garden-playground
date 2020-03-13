@@ -1,0 +1,6 @@
+kind: Project
+name: remote-sources
+sources:
+  - name: remote-services
+    # Note that the URL must point to a specific branch or tag.
+    repositoryUrl: https://github.com/Timtech4u/garden-playground.git
